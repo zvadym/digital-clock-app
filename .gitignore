@@ -1,13 +1,65 @@
 # Dependencies
-node_modules/
+/node_modules
+/.pnp
+.pnp.js
+
+# Build output
+/dist
+/build
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Production build outputs
-dist/
-build/
+# IDE directories
+.idea/
+.vscode/
+
+# Environment variables
+.env.local
+.env.*.local
+*.env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Test runner files
+/coverage
+.nyc_output
+
+# Capacitor / Native
+# Do NOT ignore the /android and /ios folders, as they are part of the project.
+# However, we DO want to ignore build artifacts and user-specific files within them.
+
+# Android
+/android/build/
+/android/app/build/
+/android/.gradle/
+/android/app/.cxx/
+/android/capacitor-cordova-android-plugins/src/main/assets/
+/android/capacitor-cordova-android-plugins/build/
+/android/app/src/main/java/com/getcapacitor/myapp/R.java
+/android/local.properties
+/android/.idea/
+!/android/gradle/wrapper/gradle-wrapper.jar
+
+# iOS
+/ios/build/
+/ios/DerivedData/
+/ios/Pods/
+/ios/App/public/
+/ios/App/App.xcworkspace/xcuserdata/
+/ios/App/App.xcodeproj/xcuserdata/
+/ios/App/App.xcodeproj/project.xcworkspace/
+!/ios/App/App.xcodeproj/project.pbxproj
+/ios/capacitor-cordova-ios-plugins/
+
+# Temporary files
+*.swp
+*~
 
 # Environment variables
 .env
@@ -21,7 +73,6 @@ build/
 .idea/
 
 # OS generated files
-.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100

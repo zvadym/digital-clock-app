@@ -20,6 +20,11 @@ const config = {
     allowMixedContent: true,
     webContentsDebuggingEnabled: true,
     minWebViewVersion: 60
+  },
+  ios: {
+    contentInset: 'automatic',
+    scrollEnabled: false,
+    allowsLinkPreview: false
   }
 };
 
