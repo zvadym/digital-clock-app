@@ -22,6 +22,12 @@ else
     echo "✅ Xcode command line tools are already installed"
 fi
 
+# Check for CocoaPods
+if ! command -v pod &> /dev/null; then
+    echo "❌ Error: CocoaPods is not installed. Please run 'sudo gem install cocoapods' and try again."
+    exit 1
+fi
+
 # Install iOS dependencies
 echo "📦 Installing iOS Capacitor plugin..."
 npm install @capacitor/ios

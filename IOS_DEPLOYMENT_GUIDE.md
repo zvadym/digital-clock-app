@@ -8,9 +8,25 @@ This guide provides complete instructions for setting up, building, and deployin
 1. **macOS** (iOS development requires macOS)
 2. **Xcode 15.0+** (Download from Mac App Store)
 3. **Node.js 18+** (Download from nodejs.org)
-4. **Xcode Command Line Tools**
+4. **Ruby 2.7.0+** (The system Ruby on macOS is often outdated. It's recommended to use a version manager like `rbenv` to install a newer version.)
+   - **Install `rbenv` and a modern Ruby version:**
+     ```bash
+     # 1. Install rbenv
+     brew install rbenv ruby-build
+     # 2. Add rbenv to zsh
+     echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+     # 3. Restart your shell/terminal
+     # 4. Install Ruby and set it as global
+     rbenv install 3.1.4
+     rbenv global 3.1.4
+     ```
+5. **Xcode Command Line Tools**
    ```bash
    xcode-select --install
+   ```
+6. **CocoaPods**
+   ```bash
+   sudo gem install cocoapods
    ```
 
 ### Apple Developer Account

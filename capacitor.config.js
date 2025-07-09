@@ -24,8 +24,7 @@ const config = {
   ios: {
     contentInset: 'automatic',
     scrollEnabled: false,
-    allowsLinkPreview: false,
-    scheme: 'Digital Clock'
+    allowsLinkPreview: false
   }
 };
 
