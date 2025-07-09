@@ -1,5 +1,3 @@
-import { CapacitorConfig } from '@capacitor/cli';
-
 const config = {
   appId: 'com.digitalclock.app',
   appName: 'Digital Clock',
@@ -25,4 +23,4 @@ const config = {
   }
 };
 
-export default config;
+module.exports = config;
