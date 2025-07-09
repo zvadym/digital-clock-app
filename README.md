@@ -1,25 +1,38 @@
 # Digital Clock Mobile App
 
-A full-screen digital clock mobile app for Android built with Vue.js 3 and Capacitor. Features a beautiful dark mode interface with glowing green text and responsive design.
+A full-screen digital clock mobile app for **Android** and **iOS** built with Vue.js 3 and Capacitor. Features a beautiful dark mode interface with glowing green text and responsive design.
 
 ## Features
 
 - ⏰ **Full-screen digital clock** with hours, minutes, and seconds
 - 🌙 **Dark mode** with a sleek black background
-- 📱 **Mobile-optimized** responsive design
+- 📱 **Mobile-optimized** responsive design for iOS and Android
 - 🔄 **Toggle between 12/24 hour format** (tap anywhere on screen)
 - 💚 **Glowing green text** with retro digital aesthetic
 - 📅 **Current date and day display**
 - 🔒 **Screen stays on** while app is active
 - 📱 **Fullscreen immersive mode** on Android
+- 🍎 **Native iOS support** with proper safe area handling
+
+## Platform Support
+
+- ✅ **Android** (API 24+)
+- ✅ **iOS** (iOS 12.0+)
+- ✅ **Web browsers** (development)
 
 ## Prerequisites
 
-Before building the app, ensure you have:
+### For Both Platforms
+1. **Node.js** (v18 or higher)
 
-1. **Node.js** (v16 or higher)
+### For Android Development
 2. **Android Studio** with SDK tools
 3. **Java Development Kit (JDK)** (v8 or higher)
+
+### For iOS Development (macOS only)
+4. **Xcode 15.0+** (from Mac App Store)
+5. **Xcode Command Line Tools**
+6. **Apple Developer Account** (for device deployment)
 
 ## Quick Start
 
@@ -35,29 +48,68 @@ npm install
 npm run build
 ```
 
-### 3. Initialize Capacitor (first time only)
+## Platform Setup
 
+### Android Setup
+
+#### Initialize Android Platform (first time only)
 ```bash
 npx cap add android
 ```
 
-### 4. Sync and Build for Android
-
+#### Build and Deploy Android
 ```bash
-npm run cap:sync
+# Method 1: Using build script (recommended)
+chmod +x build-apk.sh
+./build-apk.sh
+
+# Method 2: Manual steps
+npm run build
+npx cap sync android
+npx cap open android
 ```
 
-### 5. Open in Android Studio
+### iOS Setup (macOS only)
 
+#### Initialize iOS Platform (first time only)
 ```bash
-npm run cap:open
+# Automated setup (recommended)
+chmod +x setup-ios.sh
+./setup-ios.sh
+
+# Manual setup
+npm install @capacitor/ios
+npx cap add ios
+npm run build
+npx cap sync ios
 ```
 
-This will open Android Studio where you can build and run the app on your device.
+#### Build and Deploy iOS
+```bash
+# Method 1: Using build script (recommended)
+./build-ios.sh
 
-## Deployment to Your Phone
+# Method 2: Manual steps
+npm run build
+npx cap sync ios
+npx cap open ios
+```
 
-### Method 1: Using Android Studio (Recommended)
+## Deployment Guides
+
+### 📱 Android Deployment
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed Android instructions.
+
+### 🍎 iOS Deployment
+See [IOS_DEPLOYMENT_GUIDE.md](./IOS_DEPLOYMENT_GUIDE.md) for comprehensive iOS instructions including:
+- Simulator setup
+- Device deployment
+- App Store submission
+- Troubleshooting
+
+## Running on Devices
+
+### Android Device
 
 1. **Enable Developer Options** on your Android device:
    - Go to Settings > About Phone
@@ -67,50 +119,41 @@ This will open Android Studio where you can build and run the app on your device
 
 2. **Connect your phone** to your computer via USB
 
-3. **Open the project** in Android Studio:
+3. **Deploy the app**:
    ```bash
-   npm run cap:open
+   ./build-apk.sh  # Opens Android Studio
    ```
 
-4. **Select your device** from the device dropdown in Android Studio
+4. **Select your device** and click Run in Android Studio
 
-5. **Click the Run button** (green play icon) to install and launch the app
+### iOS Device (macOS only)
 
-### Method 2: Build APK for Manual Installation
+1. **Connect your iOS device** via USB
 
-1. **Build the APK**:
+2. **Deploy the app**:
    ```bash
-   cd android
-   ./gradlew assembleDebug
+   ./build-ios.sh  # Opens Xcode
    ```
 
-2. **Find the APK** at:
-   ```
-   android/app/build/outputs/apk/debug/app-debug.apk
-   ```
+3. **In Xcode**:
+   - Select your development team
+   - Choose your connected device
+   - Click the Play button
 
-3. **Transfer the APK** to your phone via:
-   - USB cable
-   - Email
-   - Cloud storage (Google Drive, Dropbox, etc.)
-   - ADB: `adb install app-debug.apk`
+4. **Trust the developer** on your device (Settings > General > VPN & Device Management)
 
-4. **Install the APK** on your phone:
-   - Enable "Install from Unknown Sources" in Settings
-   - Tap the APK file and follow installation prompts
+### iOS Simulator
 
-### Method 3: Using ADB (Command Line)
+```bash
+# Run on any available simulator
+npm run build:ios
 
-1. **Install ADB** (Android Debug Bridge)
-2. **Enable USB Debugging** on your phone
-3. **Connect your phone** and run:
-   ```bash
-   npm run build
-   npx cap sync
-   cd android
-   ./gradlew assembleDebug
-   adb install app/build/outputs/apk/debug/app-debug.apk
-   ```
+# Run on specific simulator
+npx cap run ios --target="iPhone 15"
+
+# List available simulators
+xcrun simctl list devices
+```
 
 ## Development
 
@@ -122,34 +165,26 @@ npm run dev
 
 Access the app at `http://localhost:3000` in your browser.
 
-### Live Reload on Device
+### Available Scripts
 
-1. Start the dev server:
-   ```bash
-   npm run dev
-   ```
+```bash
+# Development
+npm run dev                 # Start development server
+npm run build              # Build for production
 
-2. Update `capacitor.config.js` to point to your local server:
-   ```javascript
-   server: {
-     url: 'http://YOUR_IP:3000',
-     cleartext: true
-   }
-   ```
+# Android
+npm run android            # Run on Android device/emulator
+npm run build:android      # Build and run Android
+npm run cap:open           # Open Android Studio
 
-3. Sync and run:
-   ```bash
-   npx cap sync
-   npx cap run android
-   ```
+# iOS (macOS only)
+npm run ios                # Run on iOS simulator
+npm run build:ios          # Build and run iOS
+npm run cap:open:ios       # Open Xcode
 
-## Build Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run cap:sync` - Sync web assets to native platforms
-- `npm run cap:open` - Open in Android Studio
-- `npm run build:android` - Build and sync, then open Android Studio
+# General
+npm run cap:sync           # Sync web assets to native platforms
+```
 
 ## App Features
 
@@ -158,47 +193,101 @@ Access the app at `http://localhost:3000` in your browser.
 - Responsive font sizing for different screen sizes
 - Glowing green text effect for retro aesthetic
 
+### Cross-Platform Features
+- **Android**: Fullscreen immersive mode, keeps screen on
+- **iOS**: Proper safe area handling, dark status bar
+- **Both**: Touch interactions, responsive design
+
 ### Interaction
 - **Tap anywhere** to toggle between 12-hour and 24-hour format
 - Hint message appears for 5 seconds on first launch
 
-### Mobile Optimizations
-- Fullscreen immersive mode
-- Screen stays on while app is active
-- Responsive design for portrait and landscape orientations
-- Touch-optimized interface
+## Configuration
+
+### Capacitor Config
+The app is configured for both platforms in `capacitor.config.js`:
+
+```javascript
+const config = {
+  appId: 'com.digitalclock.app',
+  appName: 'Digital Clock',
+  android: {
+    allowMixedContent: true,
+    webContentsDebuggingEnabled: true
+  },
+  ios: {
+    contentInset: 'automatic',
+    scrollEnabled: false,
+    allowsLinkPreview: false
+  }
+};
+```
 
 ## Troubleshooting
 
-### Common Issues
+### Android Issues
+- **Gradle build fails**: Ensure correct Java version (JDK 8+)
+- **Device not detected**: Enable USB debugging and install drivers
+- **App crashes**: Check Android logs in Android Studio
 
-1. **Gradle build fails**: Ensure you have the correct Java version (JDK 8+)
-2. **Device not detected**: Check USB debugging is enabled and drivers are installed
-3. **App crashes on launch**: Check Android logs in Android Studio
-4. **Black screen**: Ensure all dependencies are installed correctly
+### iOS Issues (macOS only)
+- **Build errors**: Clean derived data and rebuild
+- **Signing issues**: Verify Apple Developer account and team selection
+- **Device not recognized**: Check device connection and trust computer
+- **Web content issues**: Use Safari Web Inspector for debugging
 
-### Android Studio Issues
+### General Issues
+- **Dependencies**: Run `npm install` to ensure all packages are installed
+- **Sync issues**: Run `npx cap sync` to update native projects
+- **Cache issues**: Clear browser cache or restart development server
 
-If Android Studio doesn't detect your device:
-1. Check USB debugging is enabled
-2. Install appropriate USB drivers for your device
-3. Try different USB ports/cables
-4. Restart ADB: `adb kill-server && adb start-server`
+## Project Structure
+
+```
+digital-clock-app/
+├── src/                          # Vue.js source code
+│   ├── components/
+│   │   └── DigitalClock.vue     # Main clock component
+│   ├── App.vue                  # Root component
+│   └── main.js                  # Entry point
+├── android/                     # Android platform files
+├── ios/                         # iOS platform files (after setup)
+├── build-apk.sh                 # Android build script
+├── build-ios.sh                 # iOS build script
+├── setup-ios.sh                 # iOS setup automation
+├── capacitor.config.js          # Capacitor configuration
+├── DEPLOYMENT_GUIDE.md          # Android deployment guide
+└── IOS_DEPLOYMENT_GUIDE.md      # iOS deployment guide
+```
 
 ## Customization
 
 ### Changing Colors
-Edit `src/components/DigitalClock.vue` and modify the CSS:
+Edit `src/components/DigitalClock.vue`:
 ```css
-color: #00ff41; /* Change this to your preferred color */
+color: #00ff41; /* Change to your preferred color */
+text-shadow: 0 0 20px #00ff41; /* Matching glow effect */
 ```
 
 ### Adding Features
-The app is built with Vue 3 Composition API, making it easy to add new features like:
-- Alarms
-- Timezones
+Built with Vue 3 Composition API for easy extension:
+- Alarms and timers
+- Multiple time zones
 - Custom themes
-- Weather display
+- Weather integration
+- Stopwatch functionality
+
+## Publishing
+
+### Android (Google Play Store)
+1. Generate signed APK in Android Studio
+2. Upload to Google Play Console
+3. Complete store listing and submit for review
+
+### iOS (App Store)
+1. Archive in Xcode (Product > Archive)
+2. Upload to App Store Connect
+3. Complete app information and submit for review
 
 ## License
 
@@ -206,4 +295,12 @@ MIT License - feel free to modify and distribute as needed.
 
 ## Support
 
-For issues or questions, check the troubleshooting section above or consult the Capacitor documentation at https://capacitorjs.com/
+For detailed platform-specific instructions:
+- **Android**: [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+- **iOS**: [IOS_DEPLOYMENT_GUIDE.md](./IOS_DEPLOYMENT_GUIDE.md)
+
+For general support:
+- [Capacitor Documentation](https://capacitorjs.com/docs)
+- [Vue.js Documentation](https://vuejs.org/)
+- [Android Developer Documentation](https://developer.android.com/)
+- [Apple Developer Documentation](https://developer.apple.com/documentation/)
