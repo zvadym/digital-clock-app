@@ -1,0 +1,4 @@
+rootProject.name = 'Digital Clock App'
+include ':app'
+
+apply from: 'capacitor.settings.gradle' 

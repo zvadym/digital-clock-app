@@ -19,9 +19,6 @@ build/
 # IDE and editor files
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
 # OS generated files
 .DS_Store
@@ -34,27 +31,14 @@ Thumbs.db
 
 # Android specific
 android/.gradle/
-android/.idea/
 android/build/
 android/app/build/
 android/local.properties
-android/gradle.properties
-android/gradlew
-android/gradlew.bat
-android/gradle/
 
 # Capacitor auto-generated files
 android/app/capacitor.build.gradle
 android/app/src/main/assets/
 android/capacitor-cordova-android-plugins/
-android/capacitor.settings.gradle
-android/settings.gradle
-
-# Generated Android resources (auto-created by Capacitor)
-android/app/src/main/res/drawable/
-android/app/src/main/res/values/colors.xml
-android/app/src/main/res/values/styles.xml
-android/app/src/main/res/xml/
 
 # iOS specific (if added later)
 ios/build/
